@@ -12,15 +12,17 @@ public class DatabaseHelper2 extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "TestDB.db";
     private static final String TABLE_NAME = "testdb";
     private static final String _ID = "_id";
-    private static final String COLUMN_NAME_TITLE = "name";
-    private static final String COLUMN_NAME_SUBTITLE = "detail";
+    private static final String COLUMN_TITLE = "name";
+    private static final String COLUMN_DETAIL = "detail";
+    private static final String COLUMN_TIMESTAMP = "timestamp";
 
     // SQL文
     private static final String SQL_CREATE_ENTRIES =
             "CREATE TABLE " + TABLE_NAME + "(" +
                     _ID + " INTEGER PRIMARY KEY, " +
-                    COLUMN_NAME_TITLE + " TEXT, " +
-                    COLUMN_NAME_SUBTITLE + " TEXT)";
+                    COLUMN_TITLE + " TEXT, " +
+                    COLUMN_DETAIL + " TEXT, " +
+                    COLUMN_TIMESTAMP + " TEXT)";
 
     private static final String SQL_DELETE_ENTRIES =
             "DROP TABLE IF EXISTS " + TABLE_NAME;
