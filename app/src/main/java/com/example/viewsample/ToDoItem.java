@@ -4,7 +4,7 @@ public class ToDoItem {
     private long id;
     private String name;
     private String detail;
-    // String timeStamp;
+    private String timeStamp;
 
 
     /*
@@ -33,4 +33,8 @@ public class ToDoItem {
     public void setDetail(String detail) {
         this.detail = detail;
     }
+
+    public String getTimeStamp() { return timeStamp; }
+
+    public void setTimeStamp(String timeStamp) { this.timeStamp = timeStamp; }
 }
