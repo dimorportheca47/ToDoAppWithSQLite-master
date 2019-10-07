@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#cccccc">
+    android:background="@drawable/cat">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -94,11 +94,11 @@
         android:id="@+id/lv_show"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="10dp"
         android:layout_marginHorizontal="5dp"
         android:layout_marginVertical="5dp"
+        android:background="#00CCCCCC"
         android:divider="@null"
         android:dividerHeight="2dp"
-        android:background="#cccccc"/>
+        android:padding="10dp" />
 
 </LinearLayout>
