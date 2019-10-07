@@ -34,6 +34,7 @@ import java.util.ArrayList;
 // TODO: 2019/10/03 star時の処理 -- OGW
 // TODO: 2019/10/03 （オプションメニューの作成）
 // TODO: 2019/10/03 （mipmap icon 作成）
+// test 
 
 public class MainActivity extends AppCompatActivity {
 
