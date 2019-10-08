@@ -1,15 +1,13 @@
 package com.example.viewsample;
 
+// ToDoの各属性をまとめて保持するくらす
 public class ToDoItem {
     private long id;
     private String name;
     private String detail;
     private String timeStamp;
 
-
-    /*
-     * getter と setter
-     */
+    // getterとsetter すべてpublic
     public long getId() {
         return id;
     }
