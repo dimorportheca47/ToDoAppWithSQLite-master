@@ -108,9 +108,11 @@ public class ToDoAdapter extends BaseAdapter {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 // チェック状態が変更された時の処理を記述
-                if (cbDone.isChecked()) {
+                if (cbStar.isChecked()) {
+                    ((ListView) parent).performItemClick(cbStar, position, R.id.cb_star_in_lv);
                     Log.d("listener", "CheckBox(Star) is checked");
                 } else {
+                    ((ListView) parent).performItemClick(cbStar, position, R.id.cb_star_in_lv);
                     Log.d("listener", "CheckBox(Star) is Unchecked");
 
                 }
