@@ -65,6 +65,9 @@ public class ToDoAdapter extends BaseAdapter {
 
         // TextView に文字列を設定
         ((TextView)convertView.findViewById(R.id.tv_in_lv)).setText(toDoList.get(position).getName());
+        // 必要なら★をつける
+        boolean isStar = toDoList.get(position).getIsStar().equals("1");
+        ((CheckBox)convertView.findViewById(R.id.cb_star_in_lv)).setChecked(isStar);
 
         // CheckBox (左)にリスナを設定
         final CheckBox cbDone = (CheckBox) convertView.findViewById(R.id.cb_done_in_lv);

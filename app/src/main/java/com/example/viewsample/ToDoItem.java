@@ -6,6 +6,7 @@ public class ToDoItem {
     private String name;
     private String detail;
     private String timeStamp;
+    private String isStar;  // "0":false, "1":true
 
     // getterとsetter すべてpublic
     public long getId() {
@@ -35,4 +36,8 @@ public class ToDoItem {
     public String getTimeStamp() { return timeStamp; }
 
     public void setTimeStamp(String timeStamp) { this.timeStamp = timeStamp; }
+
+    public String getIsStar() { return isStar;}
+
+    public void setIsStar(String isStar) { this.isStar = isStar; }
 }

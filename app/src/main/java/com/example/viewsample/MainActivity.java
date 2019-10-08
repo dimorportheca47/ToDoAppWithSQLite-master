@@ -65,7 +65,9 @@ public class MainActivity extends AppCompatActivity {
                 }
 
                 // リストに追加
-                ToDoItem item = createItem(name);
+                // TODO: 2019/10/08 isStarを決めるCheckBoxを追加
+                boolean isStar = true;
+                ToDoItem item = createItem(name, isStar);
                 insertData(item);
 
                 // EditTextを空欄に戻す
@@ -92,7 +94,8 @@ public class MainActivity extends AppCompatActivity {
                     }
 
                     // リストに追加
-                    ToDoItem item = createItem(name);
+                    boolean isStar = false;
+                    ToDoItem item = createItem(name, isStar);
                     insertData(item);
 
                     // EditTextを空欄に戻す
@@ -122,7 +125,9 @@ public class MainActivity extends AppCompatActivity {
                 int idxDetail = cursor.getColumnIndex("detail");
                 item.setDetail(cursor.getString(idxDetail));
                 int idxTimeStamp = cursor.getColumnIndex("timestamp");
-                item.setTimeStamp((cursor.getString(idxTimeStamp)));
+                item.setTimeStamp(cursor.getString(idxTimeStamp));
+                int idxIsStar = cursor.getColumnIndex("isstar");
+                item.setIsStar(cursor.getString(idxIsStar));
                 toDoList.add(item);
             }
         } finally {
@@ -190,10 +195,11 @@ public class MainActivity extends AppCompatActivity {
 
     // 指定された名前で要素を作成する
     // 作成時点のtimeStampを取得
-    private ToDoItem createItem(String name) {
+    private ToDoItem createItem(String name, boolean isStar) {
 
         ToDoItem item = new ToDoItem();
         item.setName(name);
+        item.setIsStar(isStar ? "1" : "0");
         DateFormat f_dt = DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.MEDIUM);
         String timeStamp = f_dt.format(new Date());  // ex. 2017/05/24 15:35:00
         item.setTimeStamp(timeStamp);
@@ -206,6 +212,7 @@ public class MainActivity extends AppCompatActivity {
         String name = item.getName();
         String detail = item.getDetail();
         String timeStamp = item.getTimeStamp();
+        String isStar = item.getIsStar();
 
         //detailに""をセット()
         if(detail == null){
@@ -217,8 +224,8 @@ public class MainActivity extends AppCompatActivity {
 
         SQLiteDatabase db = helper.getWritableDatabase();
         try {
-            db.execSQL("INSERT INTO testdb (name, detail, timestamp) VALUES (?, ?, ?);",
-                    new String[]{name, detail, timeStamp});
+            db.execSQL("INSERT INTO testdb (name, detail, timestamp, isstar) VALUES (?, ?, ?, ?);",
+                    new String[]{name, detail, timeStamp, isStar});
             adapter.notifyDataSetChanged();
             Cursor cursor = db.rawQuery("SELECT * FROM testdb", null);
             Log.d("debug", "insertData() is called: name=" + name);
