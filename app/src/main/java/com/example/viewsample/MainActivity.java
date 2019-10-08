@@ -31,21 +31,14 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-// TODO: 2019/10/03 ListViewの上に[ToDoを追加]バーが欲しい --FKM
-// TODO: 2019/10/03 todoを押したときにdialogではなく新しい画面に遷移させる -- OGW
-// TODO: 2019/10/03 [完了済みtodoを表示] ＆ deleteData() の改修 -- OGW
-// TODO: 2019/10/03 star時の処理 -- OGW
-// TODO: 2019/10/03 （オプションメニューの作成）
-// TODO: 2019/10/03 （mipmap icon 作成）
-// test
-
 public class MainActivity extends AppCompatActivity {
 
+    // 繰り返し使用するためメンバ変数とした(onCreateにて定義される)
     private EditText etName;
-    private EditText etDetail;
     private DatabaseHelper2 helper;
     private ToDoAdapter adapter;
     private ArrayList<ToDoItem> toDoList;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,30 +47,15 @@ public class MainActivity extends AppCompatActivity {
 
         // view の取得
         etName = findViewById(R.id.et_name);
-//        etDetail = findViewById(R.id.et_detail);
         ListView lvShow = findViewById(R.id.lv_show);
 
-        /*
-         * set button listener
-         */
-        //Button testBtn = findViewById(R.id.btn_test);
-//        testBtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent intent = new Intent(MainActivity.this, TestActivity.class);
-//                startActivity(intent);
-//            }
-//        });
-
+        // [+] ボタンを押したときの処理
         Button insertBtn = findViewById(R.id.btn_plus);
         insertBtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
 
-                SQLiteDatabase db = helper.getWritableDatabase();
-
                 String name = etName.getText().toString();
-                //String detail = etDetail.getText().toString();
 
                 // nameが空欄の場合，再入力を促す
                 if (name.isEmpty()) {
@@ -87,24 +65,49 @@ public class MainActivity extends AppCompatActivity {
                 }
 
                 // リストに追加
-                ToDoItem item = new ToDoItem();
-                item.setName(name);
-                DateFormat f_dt = DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.MEDIUM);
-                String timeStamp = f_dt.format(new Date());  // ex. 2017/05/24 15:35:00
-                item.setTimeStamp(timeStamp);
+                ToDoItem item = createItem(name);
                 insertData(item);
-                Log.d("debug", "timestamp is setted");
 
                 // EditTextを空欄に戻す
                 etName.setText("");
-                //etDetail.setText("");
-                Log.d("listener", "INSERT btn is onCllck()");
+                Log.d("listener", "[+] btn is onCllck()");
             }
         });
 
-        /*
-         * DBを読んで，toDoList に書き込む
-         */
+        //文字入力後エンターキーが押された場合の挙動
+        // [+]ボタン押下時と基本的に同じ処理
+        etName.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+
+                String name = etName.getText().toString();
+
+                // InputMethodManager inputMethodManager=  (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                if((event.getAction()==KeyEvent.ACTION_DOWN)&&(keyCode==KeyEvent.KEYCODE_ENTER)){
+                    // nameが空欄の場合，再入力を促す
+                    if (name.isEmpty()) {
+                        Toast.makeText(getApplicationContext(),
+                                "ToDo の名前が未入力だーよ！", Toast.LENGTH_SHORT).show();
+                        return false;
+                    }
+
+                    // リストに追加
+                    ToDoItem item = createItem(name);
+                    insertData(item);
+
+                    // EditTextを空欄に戻す
+                    etName.setText("");
+                    Log.d("listener", "Enter key is onKey()");
+
+                    //キーボードを閉じる
+                    //inputMethodManager.hideSoftInputFromWindow(etName.getWindowToken(), InputMethodManager.RESULT_UNCHANGED_SHOWN);
+                    return true;
+                }
+                return false;
+            }
+        });
+
+        // toDoList を初期化，DBからデータを読み込む
         helper = new DatabaseHelper2(MainActivity.this);
         SQLiteDatabase db = helper.getWritableDatabase();
         try {
@@ -134,13 +137,13 @@ public class MainActivity extends AppCompatActivity {
         /*
          * ListView のリスナ
          * 左の□：押すとそのtodoを削除
-         * 右の□：押すと「重要」になる
+         * 右の☆：押すと「重要」になる
          * 文字　：押すとポップアップで内容がでる
          */
         lvShow.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, final int i, long l) {
-                // Log.d("listener", "view.getId(): " + view.getId());
+
                 ListView listView = (ListView)parent;
                 final ToDoItem item = (ToDoItem) listView.getItemAtPosition(i);
 
@@ -154,9 +157,9 @@ public class MainActivity extends AppCompatActivity {
                         break;
 
                     default:
-                        // ボタン以外の領域をタップしたとき(viewはなく-1が入るはず)
-                        // タップしたアイテムの取得
-                        Log.d("debug", "Tap: " + i);
+                        // NOTE: ボタン以外の領域をタップしたとき(viewはnull?でgetId()には-1が入るはず)
+                        // TODO: 2019/10/08 ポップアップではなく右からスライドインする画面にする
+                        Log.d("debug", "ListView Tap: " + i);
 
                         new AlertDialog.Builder(MainActivity.this)
                                 .setTitle(item.getName())
@@ -182,55 +185,24 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-        //文字入力後エンターキーが押された場合の挙動
-        //EditText(etName)にリスナを設定
-        etName.setOnKeyListener(new View.OnKeyListener() {
-            @Override
-            public boolean onKey(View v, int keyCode, KeyEvent event) {
-                SQLiteDatabase db = helper.getWritableDatabase();
 
-                String name = etName.getText().toString();
-                //String detail = etDetail.getText().toString();
-
-
-
-                InputMethodManager inputMethodManager=  (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
-                if((event.getAction()==KeyEvent.ACTION_DOWN)&&(keyCode==KeyEvent.KEYCODE_ENTER)){
-                    // nameが空欄の場合，再入力を促す
-                    if (name.isEmpty()) {
-                        Toast.makeText(getApplicationContext(),
-                                "ToDo の名前が未入力だーよ！", Toast.LENGTH_SHORT).show();
-                        return false;
-                    }
-
-                    // リストに追加
-                    ToDoItem item = new ToDoItem();
-                    item.setName(name);
-                    //item.setDetail(detail);
-                    insertData(item);
-
-                    // EditTextを空欄に戻す
-                    etName.setText("");
-                    //etDetail.setText("");
-                    Log.d("listener", "Enter key is onKey()");
-
-//                    //キーボードを閉じる
-//                    inputMethodManager.hideSoftInputFromWindow(etName.getWindowToken(), InputMethodManager.RESULT_UNCHANGED_SHOWN);
-                    return true;
-                }
-                return false;
-            }
-        });
     }
 
+    // 指定された名前で要素を作成する
+    // 作成時点のtimeStampを取得
+    private ToDoItem createItem(String name) {
 
-    /*
-     * 以下DB関係のメソッド
-     */
+        ToDoItem item = new ToDoItem();
+        item.setName(name);
+        DateFormat f_dt = DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.MEDIUM);
+        String timeStamp = f_dt.format(new Date());  // ex. 2017/05/24 15:35:00
+        item.setTimeStamp(timeStamp);
+        return item;
+    }
+
+    // DBへの書き込み + リストビューへの追加
     private void insertData(ToDoItem item) {
-        /*
-         * DBへの書き込み + リストビューへの追加
-         */
+
         String name = item.getName();
         String detail = item.getDetail();
         String timeStamp = item.getTimeStamp();
@@ -249,19 +221,16 @@ public class MainActivity extends AppCompatActivity {
                     new String[]{name, detail, timeStamp});
             adapter.notifyDataSetChanged();
             Cursor cursor = db.rawQuery("SELECT * FROM testdb", null);
-            Log.d("debug", "insertData() is called");
-            Log.d("debug", "name:"+name+", detail:"+detail + " " + timeStamp);
-            Log.d("debug", "rows : " + cursor.getCount());
+            Log.d("debug", "insertData() is called: name=" + name);
         }
         finally {
             db.close();
         }
     }
 
+    // DB から削除　＋　リストビューから削除
     private void deleteData(ToDoItem item, int index) {
-        /*
-         * DB から削除　＋　リストビューから削除
-         */
+
         String name = item.getName();
         String detail = item.getDetail();
         String timeStamp = item.getTimeStamp();
@@ -280,10 +249,7 @@ public class MainActivity extends AppCompatActivity {
             adapter.notifyDataSetChanged();
 
             Cursor cursor = db.rawQuery("SELECT * FROM testdb", null);
-            Log.d("debug", "deleteData() is called");
-            Log.d("debug", "name:"+name+", detail:"+detail);
-            Log.d("debug", "rows : " + cursor.getCount());
-
+            Log.d("debug", "deleteData() is called: name = " + name);
         }
         finally {
             db.close();
