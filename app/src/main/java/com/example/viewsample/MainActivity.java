@@ -48,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
         // view の取得
         etName = findViewById(R.id.et_name);
         ListView lvShow = findViewById(R.id.lv_show);
+        final CheckBox cbStar = findViewById(R.id.cb_star);
 
         // [+] ボタンを押したときの処理
         Button insertBtn = findViewById(R.id.btn_plus);
@@ -65,8 +66,7 @@ public class MainActivity extends AppCompatActivity {
                 }
 
                 // リストに追加
-                // TODO: 2019/10/08 isStarを決めるCheckBoxを追加
-                boolean isStar = true;
+                boolean isStar = cbStar.isChecked();
                 ToDoItem item = createItem(name, isStar);
                 insertData(item);
 
@@ -94,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
                     }
 
                     // リストに追加
-                    boolean isStar = false;
+                    boolean isStar = cbStar.isChecked();
                     ToDoItem item = createItem(name, isStar);
                     insertData(item);
 
