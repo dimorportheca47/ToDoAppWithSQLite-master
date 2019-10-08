@@ -22,6 +22,10 @@ import java.util.ArrayList;
 
 import static java.security.AccessController.getContext;
 
+/*
+ * ArrayList<ToDoItem> の各要素を ListView に反映させるためのクラス
+ * List 内のCheckbox のリスナはここで定義される
+ */
 public class ToDoAdapter extends BaseAdapter {
 
     private Context context;
@@ -62,7 +66,7 @@ public class ToDoAdapter extends BaseAdapter {
         // TextView に文字列を設定
         ((TextView)convertView.findViewById(R.id.tv_in_lv)).setText(toDoList.get(position).getName());
 
-        // CheckBox にリスナを設定
+        // CheckBox (左)にリスナを設定
         final CheckBox cbDone = (CheckBox) convertView.findViewById(R.id.cb_done_in_lv);
         cbDone.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -95,6 +99,7 @@ public class ToDoAdapter extends BaseAdapter {
             }
         });
 
+        // CheckBox(右)にリスナを設定
         final CheckBox cbStar = (CheckBox) convertView.findViewById(R.id.cb_star_in_lv);
         cbStar.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
