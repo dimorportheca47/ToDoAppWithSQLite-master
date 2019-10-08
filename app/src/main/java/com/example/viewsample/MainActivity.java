@@ -109,6 +109,16 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             }
         });
+        
+        // [完了済みのtodoを表示]ボタンを押したとき
+        Button archiveBtn = findViewById(R.id.btn_archive);
+        archiveBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d("debug", "Archive Button is pressed.");
+                // TODO: 2019/10/08 完了済みのデータを表示 
+            }
+        });
 
         // toDoList を初期化，DBからデータを読み込む
         helper = new DatabaseHelper2(MainActivity.this);
