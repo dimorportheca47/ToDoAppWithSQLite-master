@@ -48,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
         // view の取得
         etName = findViewById(R.id.et_name);
         ListView lvShow = findViewById(R.id.lv_show);
+        final CheckBox cbStar = findViewById(R.id.cb_star);
 
         // [+] ボタンを押したときの処理
         Button insertBtn = findViewById(R.id.btn_plus);
@@ -65,7 +66,8 @@ public class MainActivity extends AppCompatActivity {
                 }
 
                 // リストに追加
-                ToDoItem item = createItem(name);
+                boolean isStar = cbStar.isChecked();
+                ToDoItem item = createItem(name, isStar);
                 insertData(item);
 
                 // EditTextを空欄に戻す
@@ -92,7 +94,8 @@ public class MainActivity extends AppCompatActivity {
                     }
 
                     // リストに追加
-                    ToDoItem item = createItem(name);
+                    boolean isStar = cbStar.isChecked();
+                    ToDoItem item = createItem(name, isStar);
                     insertData(item);
 
                     // EditTextを空欄に戻す
@@ -122,7 +125,9 @@ public class MainActivity extends AppCompatActivity {
                 int idxDetail = cursor.getColumnIndex("detail");
                 item.setDetail(cursor.getString(idxDetail));
                 int idxTimeStamp = cursor.getColumnIndex("timestamp");
-                item.setTimeStamp((cursor.getString(idxTimeStamp)));
+                item.setTimeStamp(cursor.getString(idxTimeStamp));
+                int idxIsStar = cursor.getColumnIndex("isstar");
+                item.setIsStar(cursor.getString(idxIsStar));
                 toDoList.add(item);
             }
         } finally {
@@ -153,7 +158,11 @@ public class MainActivity extends AppCompatActivity {
                         deleteData(item, i);
                         break;
                     case R.id.cb_star_in_lv:
-                        // TODO: 2019/10/03 starを付けた時の処理をかく -- OGW
+                        if (item.getIsStar().equals("0")) {
+                            starredData(item, i);
+                        }else {
+                            unStarredData(item, i);
+                        }
                         break;
 
                     default:
@@ -163,7 +172,7 @@ public class MainActivity extends AppCompatActivity {
 
                         new AlertDialog.Builder(MainActivity.this)
                                 .setTitle(item.getName())
-                                .setMessage(item.getDetail() + "\n" + item.getTimeStamp())
+                                .setMessage(item.getDetail() + "\n" + item.getTimeStamp() + "\n" + item.getIsStar())
                                 .setPositiveButton("できたー", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
@@ -190,10 +199,11 @@ public class MainActivity extends AppCompatActivity {
 
     // 指定された名前で要素を作成する
     // 作成時点のtimeStampを取得
-    private ToDoItem createItem(String name) {
+    private ToDoItem createItem(String name, boolean isStar) {
 
         ToDoItem item = new ToDoItem();
         item.setName(name);
+        item.setIsStar(isStar ? "1" : "0");
         DateFormat f_dt = DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.MEDIUM);
         String timeStamp = f_dt.format(new Date());  // ex. 2017/05/24 15:35:00
         item.setTimeStamp(timeStamp);
@@ -206,6 +216,7 @@ public class MainActivity extends AppCompatActivity {
         String name = item.getName();
         String detail = item.getDetail();
         String timeStamp = item.getTimeStamp();
+        String isStar = item.getIsStar();
 
         //detailに""をセット()
         if(detail == null){
@@ -215,13 +226,12 @@ public class MainActivity extends AppCompatActivity {
 
         toDoList.add(0, item);
 
+        // DBへの書き込み
         SQLiteDatabase db = helper.getWritableDatabase();
         try {
-            db.execSQL("INSERT INTO testdb (name, detail, timestamp) VALUES (?, ?, ?);",
-                    new String[]{name, detail, timeStamp});
+            db.execSQL("INSERT INTO testdb (name, detail, timestamp, isstar) VALUES (?, ?, ?, ?);",
+                    new String[]{name, detail, timeStamp, isStar});
             adapter.notifyDataSetChanged();
-            Cursor cursor = db.rawQuery("SELECT * FROM testdb", null);
-            Log.d("debug", "insertData() is called: name=" + name);
         }
         finally {
             db.close();
@@ -241,20 +251,65 @@ public class MainActivity extends AppCompatActivity {
             detail = item.getDetail();
         }
         toDoList.remove(index);
-        SQLiteDatabase db = helper.getWritableDatabase();
 
+        // DBへの書き込み
+        SQLiteDatabase db = helper.getWritableDatabase();
         try {
             db.execSQL("DELETE FROM testdb WHERE name=? AND detail=? AND timestamp=?;",
                     new String[]{name, detail, timeStamp});
             adapter.notifyDataSetChanged();
-
-            Cursor cursor = db.rawQuery("SELECT * FROM testdb", null);
-            Log.d("debug", "deleteData() is called: name = " + name);
         }
         finally {
             db.close();
         }
     }
 
+
+    private void starredData(ToDoItem item, int index) {
+        Log.d("debug", "starredData is called: idx = " + index);
+        String name = item.getName();
+        String detail = item.getDetail();
+        String timeStamp = item.getTimeStamp();
+
+        // 一番上にあがってくる
+        toDoList.remove(index);
+        item.setIsStar("1");
+        toDoList.add(0, item);
+        adapter.notifyDataSetChanged();
+
+        // DBへの書き込み
+        SQLiteDatabase db = helper.getWritableDatabase();
+        try {
+            db.execSQL("UPDATE testdb SET isstar=? WHERE name=? AND detail=? AND timestamp=?;",
+                    new String[]{"1", name, detail, timeStamp});
+            adapter.notifyDataSetChanged();
+        }
+        finally {
+            db.close();
+        }
+    }
+
+    private void unStarredData(ToDoItem item, int index) {
+        Log.d("debug", "un-starredData is called: idx = " + index);
+        String name = item.getName();
+        String detail = item.getDetail();
+        String timeStamp = item.getTimeStamp();
+
+        // toDoListの更新
+        item.setIsStar("0");
+        toDoList.set(index, item);
+        adapter.notifyDataSetChanged();
+
+        // DBへの書き込み
+        SQLiteDatabase db = helper.getWritableDatabase();
+        try {
+            db.execSQL("UPDATE testdb SET isstar=? WHERE name=? AND detail=? AND timestamp=?;",
+                    new String[]{"0", name, detail, timeStamp});
+            adapter.notifyDataSetChanged();
+        }
+        finally {
+            db.close();
+        }
+    }
 
 }

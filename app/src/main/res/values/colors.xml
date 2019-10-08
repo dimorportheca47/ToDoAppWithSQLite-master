@@ -3,4 +3,9 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#FFFFFF</color>
+
+    <!--checkbox colors-->
+    <color name="colorFrame">#222222</color>
+    <color name="colorControlNormal">#cccccc</color>
+    <color name="colorControlActivated">#FF5555</color>
 </resources>

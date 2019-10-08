@@ -25,8 +25,9 @@
 
         <EditText
             android:id="@+id/et_name"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:layout_marginStart="5dp"
             android:hint="@string/et_hint_name"
             android:inputType="text"
@@ -36,59 +37,15 @@
             android:textColorLink="#F5FFFFFF"
             />
 
+        <CheckBox
+            android:id="@+id/cb_star"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:theme="@style/StarTheme"
+            style="?android:attr/starStyle"
+            />
+
     </LinearLayout>
-
-<!--    <LinearLayout-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:orientation="horizontal">-->
-
-<!--        <EditText-->
-<!--            android:id="@+id/et_name"-->
-<!--            android:layout_width="0dp"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_weight="0.5"-->
-<!--            android:layout_margin="15dp"-->
-<!--            android:autofillHints="@string/et_hint_name"-->
-<!--            android:hint="@string/et_hint_name"-->
-<!--            android:inputType="text"-->
-<!--            android:background="#ffffff"/>-->
-
-<!--        <EditText-->
-<!--            android:id="@+id/et_detail"-->
-<!--            android:layout_width="0dp"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_weight="0.5"-->
-<!--            android:layout_margin="15dp"-->
-<!--            android:autofillHints="@string/et_hint_detail"-->
-<!--            android:hint="@string/et_hint_detail"-->
-<!--            android:inputType="textMultiLine"-->
-<!--            android:background="#ffffff"/>-->
-
-<!--    </LinearLayout>-->
-
-<!--    <LinearLayout-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:orientation="horizontal">-->
-
-<!--        <Button-->
-<!--            android:id="@+id/btn_insert"-->
-<!--            android:layout_width="0dp"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_weight="0.5"-->
-<!--            android:layout_margin="10dp"-->
-<!--            android:text="@string/btn_insert"/>-->
-
-<!--        <Button-->
-<!--            android:id="@+id/btn_test"-->
-<!--            android:layout_width="0dp"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_weight="0.5"-->
-<!--            android:layout_margin="10dp"-->
-<!--            android:text="@string/btn_test"/>-->
-
-<!--    </LinearLayout>-->
 
     <ListView
         android:id="@+id/lv_show"

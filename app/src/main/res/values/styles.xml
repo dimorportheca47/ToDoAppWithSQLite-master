@@ -8,4 +8,11 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="StarTheme" parent="Theme.AppCompat.Light">
+        <!-- オフ時 -->
+        <item name="colorControlNormal">@color/colorControlNormal</item>
+        <!-- チェック時の色 -->
+        <item name="colorControlActivated">@color/colorControlActivated</item>
+    </style>
+
 </resources>
