@@ -5,6 +5,10 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+// SQLite に対してSQLを実行するためのクラス
+// NOTE: onCreate() はアプリの初回起動時のみ実行されるので，
+// NOTE: 変更した場合は一度アンインストールしてから実行する
+
 public class DatabaseHelper2 extends SQLiteOpenHelper {
 
     // データベースの各種定数
@@ -28,7 +32,6 @@ public class DatabaseHelper2 extends SQLiteOpenHelper {
             "DROP TABLE IF EXISTS " + TABLE_NAME;
 
 
-    // constactor
     DatabaseHelper2(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
