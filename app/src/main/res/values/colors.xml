@@ -8,4 +8,7 @@
     <color name="colorFrame">#222222</color>
     <color name="colorControlNormal">#cccccc</color>
     <color name="colorControlActivated">#FF5555</color>
+
+    <!--listView archive-->
+    <color name="colorLvArchive">#33FFFFFF</color>
 </resources>

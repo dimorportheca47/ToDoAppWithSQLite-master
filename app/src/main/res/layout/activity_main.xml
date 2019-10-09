@@ -42,7 +42,7 @@
             android:id="@+id/cb_star"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="10dp"
+            android:layout_marginRight="7dp"
             android:theme="@style/StarTheme"
             style="?android:attr/starStyle"
             />
@@ -52,9 +52,8 @@
     <ListView
         android:id="@+id/lv_show"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginHorizontal="5dp"
-        android:layout_marginVertical="5dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
         android:background="#00CCCCCC"
         android:divider="@null"
         android:dividerHeight="2dp"
@@ -64,12 +63,24 @@
         android:id="@+id/btn_archive"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
         android:paddingHorizontal="15dp"
         android:background="@color/colorPrimary"
         android:text="@string/btn_show_archive"
+        android:textSize="14sp"
         android:textColor="@color/colorAccent"
         android:layout_gravity="center"
         />
+
+    <ListView
+        android:id="@+id/lv_archive"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="5dp"
+        android:layout_marginVertical="5dp"
+        android:background="#00FFFFFF"
+        android:divider="@null"
+        android:dividerHeight="2dp"
+        android:padding="10dp"
+        android:visibility="invisible"/>
 
 </LinearLayout>
