@@ -33,6 +33,7 @@
             android:hint="@string/et_hint_name"
             android:autofillHints="@string/et_hint_name"
             android:inputType="text"
+            android:textSize="17sp"
             android:textColor="#FFFFFF"
             android:textColorHighlight="#FFFFFF"
             android:textColorHint="#FFFFFF"
@@ -63,11 +64,11 @@
     <Button
         android:id="@+id/btn_archive"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingHorizontal="15dp"
+        android:layout_height="30dp"
+        android:paddingHorizontal="10dp"
         android:background="@color/colorPrimary"
         android:text="@string/btn_show_archive"
-        android:textSize="14sp"
+        android:textSize="13sp"
         android:textColor="@color/colorAccent"
         android:layout_gravity="center"
         />
