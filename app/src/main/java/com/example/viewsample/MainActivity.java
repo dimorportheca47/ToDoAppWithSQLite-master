@@ -120,9 +120,9 @@ public class MainActivity extends AppCompatActivity {
         // toDoList を初期化，DBからデータを読み込む
         helper = new DatabaseHelper2(MainActivity.this);
         SQLiteDatabase db = helper.getWritableDatabase();
-        try {
-            Cursor cursor = db.rawQuery("SELECT * FROM testdb WHERE isarchive=?;", new String[]{"0"});
-
+        try (
+            Cursor cursor = db.rawQuery("SELECT * FROM testdb WHERE isarchive=?;", new String[]{"0"})
+            ) {
             toDoList = new ArrayList<>();
             cursor.moveToFirst();
             while (cursor.moveToNext()) {
@@ -135,11 +135,15 @@ public class MainActivity extends AppCompatActivity {
                 item.setTimeStamp(cursor.getString(idxTimeStamp));
                 int idxIsStar = cursor.getColumnIndex("isstar");
                 item.setIsStar(cursor.getString(idxIsStar));
+                int idxIsArchive = cursor.getColumnIndex("isarchive");
+                item.setIsArchive(cursor.getString(idxIsArchive));
                 toDoList.add(item);
             }
+        }
 
-            cursor = db.rawQuery("SELECT * FROM testdb WHERE isarchive=?;", new String[]{"1"});
-
+        try (
+            Cursor cursor = db.rawQuery("SELECT * FROM testdb WHERE isarchive=?;", new String[]{"1"})
+        ){
             archiveList = new ArrayList<>();
             cursor.moveToFirst();
             while (cursor.moveToNext()) {
@@ -152,10 +156,10 @@ public class MainActivity extends AppCompatActivity {
                 item.setTimeStamp(cursor.getString(idxTimeStamp));
                 int idxIsStar = cursor.getColumnIndex("isstar");
                 item.setIsStar(cursor.getString(idxIsStar));
+                int idxIsArchive = cursor.getColumnIndex("isarchive");
+                item.setIsArchive(cursor.getString(idxIsArchive));
                 archiveList.add(item);
             }
-        } finally {
-            db.close();
         }
 
         // adapter作成して Listview に適用
@@ -303,14 +307,10 @@ public class MainActivity extends AppCompatActivity {
         toDoList.add(0, item);
 
         // DBへの書き込み
-        SQLiteDatabase db = helper.getWritableDatabase();
-        try {
+        try ( SQLiteDatabase db = helper.getWritableDatabase()) {
             db.execSQL("INSERT INTO testdb (name, detail, timestamp, isstar, isarchive) VALUES (?, ?, ?, ?, ?);",
                     new String[]{name, detail, timeStamp, isStar, isArchive});
             adapter.notifyDataSetChanged();
-        }
-        finally {
-            db.close();
         }
     }
 
@@ -330,14 +330,10 @@ public class MainActivity extends AppCompatActivity {
         archiveList.add(0, item);
 
         // DBへの書き込み
-        SQLiteDatabase db = helper.getWritableDatabase();
-        try {
+        try ( SQLiteDatabase db = helper.getWritableDatabase()){
             db.execSQL("UPDATE testdb SET isarchive=? WHERE name=? AND detail=? AND timestamp=?;",
                     new String[]{"1", name, detail, timeStamp});
             adapter.notifyDataSetChanged();
-        }
-        finally {
-            db.close();
         }
     }
 
@@ -357,14 +353,10 @@ public class MainActivity extends AppCompatActivity {
         toDoList.add(0, item);
 
         // DBへの書き込み
-        SQLiteDatabase db = helper.getWritableDatabase();
-        try {
+        try ( SQLiteDatabase db = helper.getWritableDatabase()){
             db.execSQL("UPDATE testdb SET isarchive=? WHERE name=? AND detail=? AND timestamp=?;",
                     new String[]{"0", name, detail, timeStamp});
             adapter.notifyDataSetChanged();
-        }
-        finally {
-            db.close();
         }
     }
 
@@ -381,14 +373,10 @@ public class MainActivity extends AppCompatActivity {
         adapter.notifyDataSetChanged();
 
         // DBへの書き込み
-        SQLiteDatabase db = helper.getWritableDatabase();
-        try {
+        try (SQLiteDatabase db = helper.getWritableDatabase()) {
             db.execSQL("UPDATE testdb SET isstar=? WHERE name=? AND detail=? AND timestamp=?;",
                     new String[]{"1", name, detail, timeStamp});
             adapter.notifyDataSetChanged();
-        }
-        finally {
-            db.close();
         }
     }
 
@@ -404,14 +392,10 @@ public class MainActivity extends AppCompatActivity {
         adapter.notifyDataSetChanged();
 
         // DBへの書き込み
-        SQLiteDatabase db = helper.getWritableDatabase();
-        try {
+        try (SQLiteDatabase db = helper.getWritableDatabase()){
             db.execSQL("UPDATE testdb SET isstar=? WHERE name=? AND detail=? AND timestamp=?;",
                     new String[]{"0", name, detail, timeStamp});
             adapter.notifyDataSetChanged();
-        }
-        finally {
-            db.close();
         }
     }
 

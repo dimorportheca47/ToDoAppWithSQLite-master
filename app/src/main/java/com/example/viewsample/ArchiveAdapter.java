@@ -19,7 +19,7 @@ import java.util.ArrayList;
 
 public class ArchiveAdapter extends BaseAdapter {
     private Context context;
-    private LayoutInflater layoutInflater = null;
+    private LayoutInflater layoutInflater;
     private ArrayList<ToDoItem> archiveList;
 
     public ArchiveAdapter(Context context) {

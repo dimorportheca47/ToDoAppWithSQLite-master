@@ -31,6 +31,7 @@
             android:layout_weight="1"
             android:layout_marginStart="5dp"
             android:hint="@string/et_hint_name"
+            android:autofillHints="@string/et_hint_name"
             android:inputType="text"
             android:textColor="#FFFFFF"
             android:textColorHighlight="#FFFFFF"
@@ -42,7 +43,7 @@
             android:id="@+id/cb_star"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="7dp"
+            android:layout_marginEnd="7dp"
             android:theme="@style/StarTheme"
             style="?android:attr/starStyle"
             />
