@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ToDo リスト</string>
+    <string name="app_name">にゃんだーりすと</string>
     <string name="et_hint_name">ToDoを追加…</string>
     <string name="et_hint_detail">メモを追加…</string>
     <string name="btn_insert">INSERT</string>
