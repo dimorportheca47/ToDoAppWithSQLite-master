@@ -11,6 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
+        android:layout_marginHorizontal="10dp"
         android:background="#B000897B"
         android:orientation="horizontal">
 
@@ -30,7 +31,9 @@
             android:layout_weight="1"
             android:layout_marginStart="5dp"
             android:hint="@string/et_hint_name"
+            android:autofillHints="@string/et_hint_name"
             android:inputType="text"
+            android:textSize="17sp"
             android:textColor="#FFFFFF"
             android:textColorHighlight="#FFFFFF"
             android:textColorHint="#FFFFFF"
@@ -41,6 +44,7 @@
             android:id="@+id/cb_star"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="7dp"
             android:theme="@style/StarTheme"
             style="?android:attr/starStyle"
             />
@@ -50,12 +54,35 @@
     <ListView
         android:id="@+id/lv_show"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginHorizontal="5dp"
-        android:layout_marginVertical="5dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
         android:background="#00CCCCCC"
         android:divider="@null"
         android:dividerHeight="2dp"
         android:padding="10dp" />
+
+    <Button
+        android:id="@+id/btn_archive"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:paddingHorizontal="10dp"
+        android:background="@color/colorPrimary"
+        android:text="@string/btn_show_archive"
+        android:textSize="13sp"
+        android:textColor="@color/colorAccent"
+        android:layout_gravity="center"
+        />
+
+    <ListView
+        android:id="@+id/lv_archive"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="5dp"
+        android:layout_marginVertical="5dp"
+        android:background="#00FFFFFF"
+        android:divider="@null"
+        android:dividerHeight="2dp"
+        android:padding="10dp"
+        android:visibility="invisible"/>
 
 </LinearLayout>

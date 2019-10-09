@@ -7,6 +7,7 @@ public class ToDoItem {
     private String detail;
     private String timeStamp;
     private String isStar;  // "0":false, "1":true
+    private String isArchive; // "0":false, "1":true
 
     // getterとsetter すべてpublic
     public long getId() {
@@ -40,4 +41,8 @@ public class ToDoItem {
     public String getIsStar() { return isStar;}
 
     public void setIsStar(String isStar) { this.isStar = isStar; }
+
+    public String getIsArchive() { return isArchive; }
+
+    public void setIsArchive(String isArchive) { this.isArchive = isArchive; }
 }

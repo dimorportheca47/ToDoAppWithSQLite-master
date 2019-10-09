@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ToDo リスト</string>
+    <string name="app_name">にゃんだーりすと</string>
     <string name="et_hint_name">ToDoを追加…</string>
     <string name="et_hint_detail">メモを追加…</string>
     <string name="btn_insert">INSERT</string>
@@ -12,4 +12,6 @@
     <string name="et_menu_memo">メモを追加...</string>
     <string name="et_menu_file">ファイルを追加</string>
     <string name="et_menu_comment">コメントを追加</string>
+    <string name="btn_show_archive">完了済みの TODO を表示</string>
+    <string name="btn_hide_archive">完了済み TODO</string>
 </resources>
