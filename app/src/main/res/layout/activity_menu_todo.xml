@@ -6,12 +6,47 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+
    <LinearLayout
        android:layout_width="match_parent"
        android:layout_height="wrap_content"
-       android:gravity="top"
-       android:orientation="vertical"
-       tools:layout_weight="1">
+       android:background="#FFFFFFFF"
+       android:gravity="center_vertical"
+       android:orientation="horizontal">
+
+      <ImageButton
+          android:id="@+id/ib_menuBackButton"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_margin="12dp"
+          android:background="#00FFFFFF"
+          android:src="@drawable/icon_leftarrow" />
+
+      <TextView
+          android:id="@+id/tv_ToDoName"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:gravity="left|center_vertical"
+          android:text="TextView"
+          android:textSize="18sp" />
+
+      <CheckBox
+          android:id="@+id/cb_star"
+          style="?android:attr/starStyle"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:layout_marginEnd="7dp"
+          android:theme="@style/StarTheme" />
+
+
+   </LinearLayout>
+
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"
+       android:layout_weight="1"
+       android:background="#F7F7F7"
+       android:orientation="vertical">
 
       <LinearLayout
           android:layout_width="match_parent"
@@ -23,6 +58,7 @@
              android:layout_width="wrap_content"
              android:layout_height="wrap_content"
              android:layout_margin="12dp"
+             android:background="#00FFFFFF"
              android:src="@drawable/icon_calender" />
 
          <EditText
@@ -46,6 +82,7 @@
              android:layout_width="wrap_content"
              android:layout_height="wrap_content"
              android:layout_margin="12dp"
+             android:background="#00FFFFFF"
              android:src="@drawable/icon_plus" />
 
          <EditText
@@ -69,6 +106,7 @@
              android:layout_width="wrap_content"
              android:layout_height="wrap_content"
              android:layout_margin="12dp"
+             android:background="#00FFFFFF"
              android:src="@drawable/icon_pen" />
 
          <EditText
@@ -86,7 +124,7 @@
       <LinearLayout
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
-          android:layout_marginBottom="50dp"
+          android:layout_weight="1"
           android:orientation="horizontal">
 
          <ImageButton
@@ -94,27 +132,27 @@
              android:layout_width="wrap_content"
              android:layout_height="wrap_content"
              android:layout_margin="12dp"
+             android:background="#00FFFFFF"
              android:src="@drawable/icon_clip" />
 
          <EditText
              android:id="@+id/et_menuFile"
              android:layout_width="match_parent"
-             android:layout_height="match_parent"
+             android:layout_height="wrap_content"
              android:layout_marginLeft="10dp"
              android:hint="@string/et_menu_file"
              android:inputType="text"
              android:textSize="24sp" />
 
       </LinearLayout>
+
+
    </LinearLayout>
-
-
    <LinearLayout
        android:layout_width="match_parent"
        android:layout_height="wrap_content"
-       android:layout_marginBottom="0dp"
        android:layout_weight="0"
-       android:gravity="bottom"
+       android:background="#FFFFFFFF"
        android:orientation="horizontal">
 
       <ImageButton
@@ -122,16 +160,20 @@
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:layout_margin="12dp"
+          android:background="#00FFFFFF"
           android:src="@drawable/icon_balloon" />
 
       <EditText
           android:layout_width="match_parent"
-          android:layout_height="match_parent"
+          android:layout_height="wrap_content"
           android:layout_marginLeft="10dp"
           android:hint="@string/et_menu_comment"
           android:inputType="text"
           android:textSize="24sp" />
    </LinearLayout>
+
+
+
 
 
 </LinearLayout>
