@@ -7,6 +7,11 @@
     <string name="btn_add">ADD</string>
     <string name="btn_remove">REMOVE</string>
     <string name="plus">+</string>
+    <string name="et_menu_alarm">日付とアラームの設定</string>
+    <string name="et_menu_subtask">サブタスクを追加</string>
+    <string name="et_menu_memo">メモを追加...</string>
+    <string name="et_menu_file">ファイルを追加</string>
+    <string name="et_menu_comment">コメントを追加</string>
     <string name="btn_show_archive">完了済みの TODO を表示</string>
     <string name="btn_hide_archive">完了済み TODO</string>
 </resources>

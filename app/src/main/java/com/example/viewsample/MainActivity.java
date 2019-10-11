@@ -2,6 +2,7 @@ package com.example.viewsample;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ActivityOptions;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -194,29 +195,50 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     default:
                         // NOTE: ボタン以外の領域をタップしたとき(viewはnull?でgetId()には-1が入るはず)
-                        // TODO: 2019/10/08 ポップアップではなく右からスライドインする画面にする
-                        Log.d("debug", "ListView Tap: " + i);
 
-                        new AlertDialog.Builder(MainActivity.this)
-                                .setTitle(item.getName())
-                                .setMessage(item.getDetail() +
-                                        "\ntimeStamp: " + item.getTimeStamp() +
-                                        "\nisStar: " + item.getIsStar() +
-                                        "\nisArchive: " + item.getIsArchive())
-                                .setPositiveButton("できたー", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        Log.d("debug", "完了 is clicked");
-                                        archiveData(item, i);
-                                    }
-                                })
-                                .setNegativeButton("まだー", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialogInterface, int i) {
-                                        Log.d("debug", "まだー is clicked");
-                                    }
-                                })
-                                .show();
+
+//                        new AlertDialog.Builder(MainActivity.this)
+//                                .setTitle(item.getName())
+//                                .setMessage(item.getDetail() +
+//                                        "\ntimeStamp: " + item.getTimeStamp() +
+//                                        "\nisStar: " + item.getIsStar() +
+//                                        "\nisArchive: " + item.getIsArchive())
+//                                .setPositiveButton("できたー", new DialogInterface.OnClickListener() {
+//                                    @Override
+//                                    public void onClick(DialogInterface dialog, int which) {
+//                                        Log.d("debug", "完了 is clicked");
+//                                        archiveData(item, i);
+//                                    }
+//                                })
+//                                .setNegativeButton("まだー", new DialogInterface.OnClickListener() {
+//                                    @Override
+//                                    public void onClick(DialogInterface dialogInterface, int i) {
+//                                        Log.d("debug", "まだー is clicked");
+//                                    }
+//                                })
+//                                .show();
+
+                        // TODO: 2019/10/08 ポップアップではなく右からスライドインする画面にする
+                        //Log.d("debug", "ListView Tap: " + i);
+                        String name = item.getName();
+                        String detail = item.getDetail();
+                        String timeStamp = item.getTimeStamp();
+                        String isStar = item.getIsStar();
+                        String isArchive = item.getIsArchive();
+
+
+                        //Intentオブジェクトを生成
+                        Intent intent_to_menu = new Intent(MainActivity.this, MenuTodo.class);
+                        intent_to_menu.putExtra("name", name);
+                        intent_to_menu.putExtra("detail", detail);
+                        intent_to_menu.putExtra("timeStamp", timeStamp);
+                        intent_to_menu.putExtra("isStar", isStar);
+                        intent_to_menu.putExtra("isArchive", isArchive);
+
+
+                        startActivity(intent_to_menu, ActivityOptions.makeSceneTransitionAnimation(MainActivity.this).toBundle());
+
+
                         break;
                 }
             }

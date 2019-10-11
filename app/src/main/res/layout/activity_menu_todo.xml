@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"
+       android:layout_weight="1"
+       android:background="#F7F7F7"
+       android:orientation="vertical">
+
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:orientation="horizontal">
+
+         <ImageButton
+             android:id="@+id/ib_menuAlarm"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_margin="12dp"
+             android:background="#00FFFFFF"
+             android:src="@drawable/ic_today_black_24dp" />
+
+         <EditText
+             android:id="@+id/et_Alarm"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             android:layout_marginLeft="10dp"
+             android:hint="@string/et_menu_alarm"
+             android:inputType="text"
+             android:textSize="24sp" />
+
+      </LinearLayout>
+
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:orientation="horizontal">
+
+         <ImageButton
+             android:id="@+id/ib_menuSubtask"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_margin="12dp"
+             android:background="#00FFFFFF"
+             android:src="@drawable/ic_add_black_24dp" />
+
+         <EditText
+             android:id="@+id/et_menuSubtask"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             android:layout_marginLeft="10dp"
+             android:hint="@string/et_menu_subtask"
+             android:inputType="text"
+             android:textSize="24sp" />
+
+      </LinearLayout>
+
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:orientation="horizontal">
+
+         <ImageButton
+             android:id="@+id/ib_menuMemo"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_margin="12dp"
+             android:background="#00FFFFFF"
+             android:src="@drawable/ic_create_black_24dp" />
+
+         <EditText
+             android:id="@+id/et_menuMemo"
+             android:layout_width="match_parent"
+             android:layout_height="200dp"
+             android:layout_marginLeft="10dp"
+             android:gravity="top"
+             android:hint="@string/et_menu_memo"
+             android:inputType="text"
+             android:textSize="24sp" />
+
+      </LinearLayout>
+
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_weight="1"
+          android:orientation="horizontal">
+
+         <ImageButton
+             android:id="@+id/ib_menuFile"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_margin="12dp"
+             android:background="#00FFFFFF"
+             android:src="@drawable/ic_attach_file_black_24dp" />
+
+         <EditText
+             android:id="@+id/et_menuFile"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:layout_marginLeft="10dp"
+             android:hint="@string/et_menu_file"
+             android:inputType="text"
+             android:textSize="24sp" />
+
+      </LinearLayout>
+
+
+   </LinearLayout>
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:layout_weight="0"
+       android:background="#FFFFFFFF"
+       android:orientation="horizontal">
+
+      <ImageButton
+          android:id="@+id/ib_menuComment"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_margin="12dp"
+          android:background="#00FFFFFF"
+          android:src="@drawable/ic_chat_bubble_outline_black_24dp" />
+
+      <EditText
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginLeft="10dp"
+          android:hint="@string/et_menu_comment"
+          android:inputType="text"
+          android:textSize="24sp" />
+   </LinearLayout>
+
+
+
+
+
+</LinearLayout>
