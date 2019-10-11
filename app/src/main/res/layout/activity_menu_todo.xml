@@ -20,7 +20,7 @@
           android:layout_height="wrap_content"
           android:layout_margin="12dp"
           android:background="#00FFFFFF"
-          android:src="@drawable/icon_leftarrow" />
+          android:src="@drawable/ic_arrow_back_black_24dp" />
 
       <TextView
           android:id="@+id/tv_ToDoName"
@@ -59,7 +59,7 @@
              android:layout_height="wrap_content"
              android:layout_margin="12dp"
              android:background="#00FFFFFF"
-             android:src="@drawable/icon_calender" />
+             android:src="@drawable/ic_today_black_24dp" />
 
          <EditText
              android:id="@+id/et_Alarm"
@@ -83,7 +83,7 @@
              android:layout_height="wrap_content"
              android:layout_margin="12dp"
              android:background="#00FFFFFF"
-             android:src="@drawable/icon_plus" />
+             android:src="@drawable/ic_add_black_24dp" />
 
          <EditText
              android:id="@+id/et_menuSubtask"
@@ -107,7 +107,7 @@
              android:layout_height="wrap_content"
              android:layout_margin="12dp"
              android:background="#00FFFFFF"
-             android:src="@drawable/icon_pen" />
+             android:src="@drawable/ic_create_black_24dp" />
 
          <EditText
              android:id="@+id/et_menuMemo"
@@ -133,7 +133,7 @@
              android:layout_height="wrap_content"
              android:layout_margin="12dp"
              android:background="#00FFFFFF"
-             android:src="@drawable/icon_clip" />
+             android:src="@drawable/ic_attach_file_black_24dp" />
 
          <EditText
              android:id="@+id/et_menuFile"
@@ -161,7 +161,7 @@
           android:layout_height="wrap_content"
           android:layout_margin="12dp"
           android:background="#00FFFFFF"
-          android:src="@drawable/icon_balloon" />
+          android:src="@drawable/ic_chat_bubble_outline_black_24dp" />
 
       <EditText
           android:layout_width="match_parent"
