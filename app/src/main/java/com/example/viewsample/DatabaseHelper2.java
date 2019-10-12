@@ -9,6 +9,16 @@ import android.util.Log;
 // NOTE: onCreate() はアプリの初回起動時のみ実行されるので，
 // NOTE: 変更した場合は一度アンインストールしてから実行する
 
+//ToDo:各ToDoに対して、詳細メニューのデータをDBに結びつける
+//期限:deadline
+//リマインダー:reminder
+//繰り返すかどうか:repeat
+//サブタスク:subtask ToDo:subtaskの構造を決定する
+//メモ:memo
+//添付ファイル:attached
+//コメント:comment ToDo:コメントはチャットのような形で実装
+
+//DBへの保存は各項目を記入後、決定ボタン（チェックボタン）を押してMenuToDo画面に戻るタイミング
 public class DatabaseHelper2 extends SQLiteOpenHelper {
 
     // データベースの各種定数
