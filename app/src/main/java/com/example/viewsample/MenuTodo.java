@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.widget.Toolbar;
 
 public class MenuTodo extends AppCompatActivity {
@@ -22,14 +23,20 @@ public class MenuTodo extends AppCompatActivity {
         String isStar = intent.getStringExtra("isStar");
         String isArchive = intent.getStringExtra("isArchive");
 
-
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
-
         getSupportActionBar().setTitle(name);
 
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    }
+
+    // Toolbarのアイテムがタップされた場合に呼ばれる
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == android.R.id.home){
+                finish();
+        }
+        return super.onOptionsItemSelected(item);
     }
 
 
