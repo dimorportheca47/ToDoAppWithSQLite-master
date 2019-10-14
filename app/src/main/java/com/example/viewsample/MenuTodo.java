@@ -5,9 +5,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.widget.Toolbar;
 
 public class MenuTodo extends AppCompatActivity {
+    //ToDo:削除ボタン、スターボタンの追加
+    //ToDo:MainActivityの画面で各ToDoになんの詳細メニューが書かれてるかをアイコンで表示
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,15 +24,25 @@ public class MenuTodo extends AppCompatActivity {
         String timeStamp = intent.getStringExtra("timeStamp");
         String isStar = intent.getStringExtra("isStar");
         String isArchive = intent.getStringExtra("isArchive");
-
-
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
+        String deadline = intent.getStringExtra("deadline");
+        String reminder = intent.getStringExtra("reminder");
+        String isRepeat = intent.getStringExtra("isRepeat");
+        String memo = intent.getStringExtra("memo");
 
         getSupportActionBar().setTitle(name);
 
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    }
+
+    // Toolbarのアイテムがタップされた場合に呼ばれる
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == android.R.id.home){
+                finish();
+        }
+        return super.onOptionsItemSelected(item);
     }
 
 

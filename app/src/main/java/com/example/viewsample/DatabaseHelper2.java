@@ -9,11 +9,15 @@ import android.util.Log;
 // NOTE: onCreate() はアプリの初回起動時のみ実行されるので，
 // NOTE: 変更した場合は一度アンインストールしてから実行する
 
+//サブタスク:subtask(COLUMN_SUBTASK) ToDo:subtaskの構造を決定する
+//添付ファイル:attached(COLUMN_ATTACHED)
+//コメント:comment(COLUMN_COMMENT) ToDo:コメントはチャットのような形で実装
+
 public class DatabaseHelper2 extends SQLiteOpenHelper {
 
     // データベースの各種定数
     private static final int DATABASE_VERSION = 1;
-    private static final String DATABASE_NAME = "TestDB.db";
+    private static final String DATABASE_NAME = "TESTDB.db"; // NOTE：アンインストールしても動作しなかったので変えた
     private static final String TABLE_NAME = "testdb";
     private static final String _ID = "_id";
     private static final String COLUMN_TITLE = "name";
@@ -21,6 +25,11 @@ public class DatabaseHelper2 extends SQLiteOpenHelper {
     private static final String COLUMN_TIMESTAMP = "timestamp";
     private static final String COLUMN_STAR = "isstar";
     private static final String COLUMN_ARCHIVE = "isarchive";
+    private static final String COLUMN_DEADLINE = "deadline";
+    private static final String COLUMN_REMINDER = "reminder";
+    private static final String COLUMN_REPEAT = "isrepeat";
+    private static final String COLUMN_MEMO = "memo";
+
 
     // SQL文
     private static final String SQL_CREATE_ENTRIES =
@@ -30,7 +39,11 @@ public class DatabaseHelper2 extends SQLiteOpenHelper {
                     COLUMN_DETAIL + " TEXT, " +
                     COLUMN_TIMESTAMP + " TEXT, " +
                     COLUMN_STAR + " TEXT, " +
-                    COLUMN_ARCHIVE + " TEXT)";
+                    COLUMN_ARCHIVE + " TEXT, " +
+                    COLUMN_DEADLINE + " TEXT, " +
+                    COLUMN_REMINDER + " TEXT, " +
+                    COLUMN_REPEAT + " TEXT, " +
+                    COLUMN_MEMO + " TEXT)";
 
     private static final String SQL_DELETE_ENTRIES =
             "DROP TABLE IF EXISTS " + TABLE_NAME;
