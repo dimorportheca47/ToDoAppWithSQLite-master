@@ -9,6 +9,8 @@ import android.view.MenuItem;
 import android.widget.Toolbar;
 
 public class MenuTodo extends AppCompatActivity {
+    //ToDo:削除ボタン、スターボタンの追加
+    //ToDo:MainActivityの画面で各ToDoになんの詳細メニューが書かれてるかをアイコンで表示
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

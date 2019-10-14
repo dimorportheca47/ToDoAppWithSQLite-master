@@ -8,6 +8,13 @@ import android.util.Log;
 // SQLite に対してSQLを実行するためのクラス
 // NOTE: onCreate() はアプリの初回起動時のみ実行されるので，
 // NOTE: 変更した場合は一度アンインストールしてから実行する
+//期限:deadline(COLUMN_DEADLINE)
+//リマインダー:reminder(COLUMN_REMINDER)
+//繰り返すかどうか:repeat(COLUMN_REPEAT)
+//サブタスク:subtask(COLUMN_SUBTASK) ToDo:subtaskの構造を決定する
+//メモ:memo(COLUMN_MEMO)
+//添付ファイル:attached(COLUMN_ATTACHED)
+//コメント:comment(COLUMN_COMMENT) ToDo:コメントはチャットのような形で実装
 
 public class DatabaseHelper2 extends SQLiteOpenHelper {
 
