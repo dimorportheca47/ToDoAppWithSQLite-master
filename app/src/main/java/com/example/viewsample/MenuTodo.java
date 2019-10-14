@@ -24,6 +24,10 @@ public class MenuTodo extends AppCompatActivity {
         String timeStamp = intent.getStringExtra("timeStamp");
         String isStar = intent.getStringExtra("isStar");
         String isArchive = intent.getStringExtra("isArchive");
+        String deadline = intent.getStringExtra("deadline");
+        String reminder = intent.getStringExtra("reminder");
+        String isRepeat = intent.getStringExtra("isRepeat");
+        String memo = intent.getStringExtra("memo");
 
         getSupportActionBar().setTitle(name);
 

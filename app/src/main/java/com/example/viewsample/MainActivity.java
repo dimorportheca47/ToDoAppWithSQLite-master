@@ -117,9 +117,11 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             }
         });
+        Log.d("debug", "ok, here");
 
         // toDoList を初期化，DBからデータを読み込む
         helper = new DatabaseHelper2(MainActivity.this);
+        Log.d("debug", "hello");
         SQLiteDatabase db = helper.getWritableDatabase();
         try (
             Cursor cursor = db.rawQuery("SELECT * FROM testdb WHERE isarchive=?;", new String[]{"0"})
@@ -138,9 +140,23 @@ public class MainActivity extends AppCompatActivity {
                 item.setIsStar(cursor.getString(idxIsStar));
                 int idxIsArchive = cursor.getColumnIndex("isarchive");
                 item.setIsArchive(cursor.getString(idxIsArchive));
+                Log.d("debug", "1");
+                int idxDeadline = cursor.getColumnIndex("deadline");
+                item.setDeadline(cursor.getString(idxDeadline));
+                Log.d("debug", "2");
+                int idxReminder = cursor.getColumnIndex("reminder");
+                item.setReminder(cursor.getString(idxReminder));
+                Log.d("debug", "3");
+                int idxIsRepeat = cursor.getColumnIndex("isrepeat");
+                item.setIsRepeat(cursor.getString(idxIsRepeat));
+                Log.d("debug", "4");
+                int idxMemo = cursor.getColumnIndex("memo");
+                item.setMemo(cursor.getString(idxMemo));
                 toDoList.add(item);
+
             }
         }
+        Log.d("debug", "ok, here2");
 
         try (
             Cursor cursor = db.rawQuery("SELECT * FROM testdb WHERE isarchive=?;", new String[]{"1"})
@@ -159,9 +175,18 @@ public class MainActivity extends AppCompatActivity {
                 item.setIsStar(cursor.getString(idxIsStar));
                 int idxIsArchive = cursor.getColumnIndex("isarchive");
                 item.setIsArchive(cursor.getString(idxIsArchive));
+                int idxDeadline = cursor.getColumnIndex("deadline");
+                item.setDeadline(cursor.getString(idxDeadline));
+                int idxReminder = cursor.getColumnIndex("reminder");
+                item.setReminder(cursor.getString(idxReminder));
+                int idxIsRepeat = cursor.getColumnIndex("isrepeat");
+                item.setIsRepeat(cursor.getString(idxIsRepeat));
+                int idxMemo = cursor.getColumnIndex("memo");
+                item.setMemo(cursor.getString(idxMemo));
                 archiveList.add(item);
             }
         }
+        Log.d("debug", "ok, here3");
 
         // adapter作成して Listview に適用
         adapter = new ToDoAdapter(MainActivity.this);
@@ -225,6 +250,10 @@ public class MainActivity extends AppCompatActivity {
                         String timeStamp = item.getTimeStamp();
                         String isStar = item.getIsStar();
                         String isArchive = item.getIsArchive();
+                        String deadline = item.getDeadline();
+                        String reminder = item.getReminder();
+                        String isRepeat = item.getIsRepeat();
+                        String memo = item.getMemo();
 
 
                         //Intentオブジェクトを生成
@@ -234,6 +263,10 @@ public class MainActivity extends AppCompatActivity {
                         intent_to_menu.putExtra("timeStamp", timeStamp);
                         intent_to_menu.putExtra("isStar", isStar);
                         intent_to_menu.putExtra("isArchive", isArchive);
+                        intent_to_menu.putExtra("deadline", deadline);
+                        intent_to_menu.putExtra("reminder", reminder);
+                        intent_to_menu.putExtra("isRepeat", isRepeat);
+                        intent_to_menu.putExtra("memo", memo);
 
 
                         startActivity(intent_to_menu, ActivityOptions.makeSceneTransitionAnimation(MainActivity.this).toBundle());
@@ -274,7 +307,11 @@ public class MainActivity extends AppCompatActivity {
                                 .setMessage(item.getDetail() +
                                         "\ntimeStamp: " + item.getTimeStamp() +
                                         "\nisStar: " + item.getIsStar() +
-                                        "\nisArchive: " + item.getIsArchive())
+                                        "\nisArchive: " + item.getIsArchive() +
+                                        "\ndeadline: " + item.getDeadline() +
+                                        "\nreminder: " + item.getReminder() +
+                                        "\nisRepeat: " + item.getIsRepeat() +
+                                        "\nmemo: " + item.getMemo())
                                 .show();
                         break;
                 }
@@ -319,6 +356,10 @@ public class MainActivity extends AppCompatActivity {
         String timeStamp = item.getTimeStamp();
         String isStar = item.getIsStar();
         String isArchive = item.getIsArchive();
+        String deadline = item.getDeadline();
+        String reminder = item.getReminder();
+        String isRepeat = item.getIsRepeat();
+        String memo = item.getMemo();
 
         //detailに""をセット()
         if(detail == null){
@@ -330,8 +371,10 @@ public class MainActivity extends AppCompatActivity {
 
         // DBへの書き込み
         try ( SQLiteDatabase db = helper.getWritableDatabase()) {
-            db.execSQL("INSERT INTO testdb (name, detail, timestamp, isstar, isarchive) VALUES (?, ?, ?, ?, ?);",
-                    new String[]{name, detail, timeStamp, isStar, isArchive});
+            db.execSQL("INSERT INTO testdb "
+                            + "(name, detail, timestamp, isstar, isarchive, deadline, reminder, isrepeat, memo) "
+                            + " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);",
+                    new String[]{name, detail, timeStamp, isStar, isArchive, deadline, reminder, isRepeat, memo});
             adapter.notifyDataSetChanged();
         }
     }
